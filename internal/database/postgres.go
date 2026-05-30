@@ -10,6 +10,10 @@ import (
 func Connect(databaseURL string) (*pgxpool.Pool, error) {
 	ctx := context.Background()
 
+	if databaseURL == "" {
+	databaseURL = "postgres://postgres:secret@localhost:5432/todos_db?sslmode=disable"
+	}
+
 	config, err := pgxpool.ParseConfig(databaseURL)
 
 	if err != nil {
